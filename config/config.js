@@ -1,0 +1,1 @@
+export const defaultCategorys = ['comida', 'servicios', 'salidas', 'educación', 'transporte', 'trabajo']

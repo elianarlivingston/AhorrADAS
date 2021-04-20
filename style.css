@@ -1,0 +1,28 @@
+.h-custom {
+    height: calc(100% - 3.5rem);
+}
+.grid-custom-balances {
+    grid-area: balances;
+}
+.grid-custom-filters{
+    grid-area: filters;
+}
+.grid-custom-operations {
+    grid-area: operations;
+}
+
+.grid-custom-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(3, auto);
+    grid-template-areas: 'balances' 'filters' 'operations';
+    gap: 1rem;
+}
+
+@media screen and (min-width: 768px) {
+    .grid-custom-container {
+        grid-template-columns: auto 1fr;
+        grid-template-rows: auto 1fr;
+        grid-template-areas: 'balances operations' 'filters operations' ;
+    } 
+}
