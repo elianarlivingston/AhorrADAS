@@ -11,6 +11,7 @@ const handlerHashChange = () => {
             section?.classList.remove('hidden')
         } 
         else if(hash === '') {
+            // SOLUCIONAR
             const firstElement = document.querySelector('section')
             const firstLink = Array.from(document.querySelectorAll(`a[href="${firstElement.id}"]`))
 

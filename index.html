@@ -110,57 +110,15 @@
                         </div>
                     </aside>
 
-                    <!-- FILTERS DESKTOP -->
-                    <aside class="grid-custom-filters w-full md:w-80 px-4 py-6 rounded shadow-md bg-white hidden md:block">
-                        <header>
-                            <h3 class="font-semibold pb-4">Filtros</h3>
-                        </header>
-                        <form class="flex flex-col gap-4" data-filterform>
-
-                            <label class="flex flex-col gap-2">
-                                <span>Tipo</span>
-                                <select id="filter-by-type" class="p-2 bg-gray-50 rounded border border-gray-100">
-                                    <option value="all" selected>Todos</option>
-                                    <option value="spending">Gastos</option>
-                                    <option value="profits">Ganancias</option>
-                                </select>
-                            </label>
-
-                            <label class="flex flex-col gap-2">
-                                <span>Categorías</span>
-                                <select id="filter-by-category" data-filter="filter-by-category" class="p-2 bg-gray-50 rounded border border-gray-100">
-                                
-                                </select>
-                            </label>
-
-                            <label class="flex flex-col gap-2">
-                                <span>Desde</span>
-                                <input type="date" id="filter-by-date" class="p-2 bg-gray-50 rounded border border-gray-100">
-                            </label>
-
-                            <label class="flex flex-col gap-2">
-                                <span>Ordenar por</span>
-                                <select id="order-by" class="p-2 bg-gray-50 rounded border border-gray-100">
-                                    <option value="more-recent" selected>Más reciente</option>
-                                    <option value="less-recent">Menos reciente</option>
-                                    <option value="desc">Mayor monto</option>
-                                    <option value="asc">Menor monto</option>
-                                    <option value="a-z">A/Z</option>
-                                    <option value="z-a">Z/A</option>
-                                </select>
-                            </label>
-                        </form>
-                    </aside>
-
-                    <!-- FILTERS MOBILE -->
-                    <aside class="grid-custom-filters w-full md:w-80 px-4 py-6 rounded shadow-md bg-white md:hidden">
-                        <details>
+                    <!-- FILTERS -->
+                    <aside class="grid-custom-filters w-full md:w-80">
+                        <details class="px-4 py-6 rounded shadow-md bg-white">
                             <summary class="font-semibold outline-none">
                                 Filtros
                             </summary>
-    
-                            <form class="flex flex-col gap-4 pt-4" data-filterform>
-    
+
+                            <form class="flex flex-col gap-4" id="form-filter-operations">
+
                                 <label class="flex flex-col gap-2">
                                     <span>Tipo</span>
                                     <select id="filter-by-type" class="p-2 bg-gray-50 rounded border border-gray-100">
@@ -169,28 +127,33 @@
                                         <option value="profits">Ganancias</option>
                                     </select>
                                 </label>
-    
+
                                 <label class="flex flex-col gap-2">
                                     <span>Categorías</span>
-                                    <select id="filter-by-category" data-filter="filter-by-category" class="p-2 bg-gray-50 rounded border border-gray-100">
-                                        
+                                    <select 
+                                        id="filter-by-category" 
+                                        data-list="category" 
+                                        class="p-2 bg-gray-50 rounded border border-gray-100">
                                     </select>
                                 </label>
-    
+
                                 <label class="flex flex-col gap-2">
                                     <span>Desde</span>
-                                    <input type="date" id="date" class="p-2 bg-gray-50 rounded border border-gray-100">
+                                    <input 
+                                        type="date" 
+                                        id="filter-by-date" 
+                                        class="p-2 bg-gray-50 rounded border border-gray-100">
                                 </label>
-    
+
                                 <label class="flex flex-col gap-2">
                                     <span>Ordenar por</span>
                                     <select id="order-by" class="p-2 bg-gray-50 rounded border border-gray-100">
-                                        <option value="more-recent" selected>Más reciente</option>
-                                        <option value="less-recent">Menos reciente</option>
-                                        <option value="greater-amount">Mayor monto</option>
-                                        <option value="lower-amount">Menor monto</option>
-                                        <option value="a-z">A/Z</option>
-                                        <option value="z-a">Z/A</option>
+                                        <option value="date-desc" selected>Más reciente</option>
+                                        <option value="date-asc">Menos reciente</option>
+                                        <option value="amount-asc">Menor monto</option>
+                                        <option value="amount-desc">Mayor monto</option>
+                                        <option value="asc">A/Z</option>
+                                        <option value="desc">Z/A</option>
                                     </select>
                                 </label>
                             </form>
@@ -203,7 +166,7 @@
                             <h2 class="text-lg font-semibold">Operaciones</h2>
                             <button 
                                 class="p-2 rounded text-sm text-white bg-indigo-500 hover:bg-blue-600"
-                                data-toggle
+                                data-toggle="modal"
                             >
                                 <span class="fas fa-plus"></span>
                                 <span class="hidden lg:inline-block">
@@ -212,52 +175,31 @@
                             </button>
                         </header>
 
-                        <!-- TABLE MOBILE -->
-                        <div id="table-operations-mobile">
-                            <table class="flex gap-4 lg:hidden my-4 text-left">
-                                <thead class="w-full block">
-                                    <tr class="grid grid-cols-1">
-                                        <th class="py-2">Descripción</th>
-                                        <th class="py-2">Categoría</th>
-                                        <th class="py-2">Fecha</th>
-                                        <th class="py-2">Monto</th>
-                                        <th class="py-2">Acciones</th>
-                                    </tr>
-                                </thead>
-    
-                                <tbody class="w-full text-center " id="table-desktop">
-                                    <tr class="grid grid-cols-1">
-                                        <td class="truncate py-2">
-                                            <p class="truncate font-semibold">Descripción</p>
-                                        </td>
-                                        <td class="py-2"> 
-                                            <p class="flex justify-center">
-                                                <label 
-                                                    class="w-max truncate p-2 rounded bg-indigo-100 text-indigo-600"
-                                                >Categoría</label>
-                                            </p>
-                                        </td>
-                                        <td class="py-2">
-                                            <p>19/04/2021</p>
-                                        </td>
-                                        <td class="py-2">
-                                            <p class="truncate text-red-500 font-semibold">-$100</p>
-                                        </td>
-                                        <td class="py-2">
-                                            <div 
-                                                class="flex gap-4 text-blue-400 cursor-pointer justify-center"
-                                            >
-                                                <button>Editar</button>
-                                                <button>Eliminar</button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-
                         <!-- TABLE DESKTOP -->
-                        <div id="table-operations-desktop"></div>
+                        <table class="w-full flex-col gap-2 py-4" id="table">
+                            <thead class="w-full block py-2 border-b border-gray-200">
+                                <tr class="grid grid-cols-5">
+                                    <th>Descripción</th>
+                                    <th>Categoría</th>
+                                    <th>Fecha</th>
+                                    <th>Monto</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                
+                            <tbody class="w-full flex flex-col gap-4 text-center " id="table-operations-desktop">
+                            </tbody>
+                        </table>
+
+                        <figure class="w-full py-6 flex flex-col gap-4 justify-center items-center hidden" id="not-results">
+                            <img class="w-full max-w-sm" src="./assets/img/wallet.svg" alt="No hay resultados">
+                                    
+                            <figcaption class="flex flex-col gap-4 text-center">
+                                <span class="text-lg font-semibold">Sin resultados</span>
+                                <span>Cambia los filtros o agrega operaciones</span>
+                            </figcaption>
+                        </figure>
+
                     </article>
                 </div>
             </section>
@@ -272,7 +214,7 @@
                     <form id="form-create-category">
                         <div class="flex gap-2" >
                             <div class="flex flex-col lg:flex-grow lg:w-max ">
-                                <input type="search" placeholder="Nombre de categoría" id="name" class="flex w-full py-1 px-2 lg:py-2 lg:px-4 rounded bg-gray-50 border border-gray-100" required minlength="3">
+                                <input type="text" placeholder="Nombre de categoría" id="name" class="flex w-full py-1 px-2 lg:py-2 lg:px-4 rounded bg-gray-50 border border-gray-100" required minlength="3">
 
                                 <div class="text-red-500 text-sm" id="category-message-error"></div>
                             </div>
@@ -297,19 +239,17 @@
                     <form id="form-edit-category">
                         <div class="flex gap-2" >
                             <div class="flex flex-col lg:flex-grow lg:w-max ">
-                                <input type="search" placeholder="Nombre de categoría" id="rename" class="flex w-full py-1 px-2 lg:py-2 lg:px-4 rounded bg-gray-50 border border-gray-100" required minlength="3">
+                                <input type="text" placeholder="Nombre de categoría" id="rename" class="flex w-full py-1 px-2 lg:py-2 lg:px-4 rounded bg-gray-50 border border-gray-100" required minlength="3">
 
                                 <div class="text-red-500 text-sm" id="category-message-error"></div>
                             </div>
-                            <button type="button" class="p-2 rounded text-sm bg-gray-200 hover:bg-gray-300" data-cancel >Cancelar</button>
+                            <button type="button" class="p-2 rounded text-sm bg-gray-200 hover:bg-gray-300" data-cancel="category">Cancelar</button>
                             <button type="submit" class="py-2 px-4 rounded bg-indigo-500 hover:bg-gray-400 text-white">
                                 <span class="fas fa-plus lg:hidden"></span>
                                 <span class="hidden lg:block">Editar categoría</span>
                             </button>
                         </div>
                     </form>
-
-                    <ul class="flex flex-col gap-3 pt-6" id="list-categories"></ul>
                 </div>
             </section>
 
@@ -320,8 +260,10 @@
                         <h2 class="text-xl font-semibold">Reportes</h2>
                     </header>
                     <div class="mt-6 p-6 rounded shadow-md bg-white">
+                        <div id="reports" class="flex flex-col gap-6"></div>
+
                         <!-- NOT RESULTS -->
-                        <figure class="w-full py-6 flex flex-col gap-4 justify-center items-center" id="not-result">
+                        <figure class="w-full py-6 flex flex-col gap-4 justify-center items-center" id="not-reports">
                             <img class="w-full max-w-sm" src="./assets/img/wallet.svg" alt="No hay resultados">
                             <figcaption class="text-center text-lg font-semibold">
                                 Sin operaciones
@@ -335,8 +277,8 @@
 
     <div class="hidden" id="modal">
         <aside class="w-full h-screen fixed top-0 left-0 right-0 bottom-0 bg-gray-500 bg-opacity-50 p-4 flex justify-center items-center text-gray-600" >
-            <article class="w-full max-w-md p-6 bg-white rounded relative">
-                <button class="fas fa-times p-1 absolute top-4 right-4" data-toggle>
+            <article class="w-full max-w-md p-6 bg-white rounded relative" id="modal-create">
+                <button class="fas fa-times p-1 absolute top-4 right-4" data-toggle="modal">
                 </button>
     
                 <header class="text-center">
@@ -366,7 +308,7 @@
 
                     <label class="flex flex-col gap-2" class="p-2 bg-gray-50">
                         <span>Categoría</span>
-                        <select id="list-form-categories" class="p-2 bg-gray-50" required>
+                        <select id="category" data-list="category" class="p-2 bg-gray-50" required>
                         </select>
                         <div class="text-red-500 text-sm" id="category-message-error"></div>
                     </label>
@@ -378,7 +320,58 @@
                     </label>
 
                     <div class="flex justify-end gap-2">
-                        <button type="button" class="p-2 rounded text-sm bg-gray-200 hover:bg-gray-300" data-toggle>Cancelar</button>
+                        <button type="button" class="p-2 rounded text-sm bg-gray-200 hover:bg-gray-300" data-toggle="modal">Cancelar</button>
+                        <button type="submit" class="p-2 rounded text-sm text-white bg-blue-500 hover:bg-blue-600">
+                            Crear Operación
+                        </button>
+                    </div>
+                </form>
+            </article>
+
+            <article class="hidden w-full max-w-md p-6 bg-white rounded relative" id="modal-edit">
+                <button class="fas fa-times p-1 absolute top-4 right-4" data-toggle="modal">
+                </button>
+    
+                <header class="text-center">
+                    <h3 class="text-lg font-semibold">Crear operación</h3>
+                </header>
+    
+                <form class="flex flex-col gap-4 py-6" id="form-edit-operation">
+                    <label class="flex flex-col gap-2">
+                        <span>Descripción</span>
+                        <input type="text" id="description" class="p-2 bg-gray-50" placeholder="Descripcion" minlength="10" required>
+                        <div class="text-red-500 text-sm" id="category-message-error"></div>
+                    </label>
+    
+                    <label class="flex flex-col gap-2" class="p-2 bg-gray-50">
+                        <span>Monto</span>
+                        <input type="number" id="amount" class="p-2 bg-gray-50" placeholder="Monto" min="1" required>
+                        <div class="text-red-500 text-sm" id="category-message-error"></div>
+                    </label>
+    
+                    <label class="flex flex-col gap-2">
+                        <span>Tipo</span>
+                        <select id="type" class="p-2 bg-gray-50 rounded border border-gray-100">
+                            <option value="spending" selected>Gastos</option>
+                            <option value="profits">Ganancias</option>
+                        </select>
+                    </label>
+
+                    <label class="flex flex-col gap-2" class="p-2 bg-gray-50">
+                        <span>Categoría</span>
+                        <select id="category" data-list="category" class="p-2 bg-gray-50" required>
+                        </select>
+                        <div class="text-red-500 text-sm" id="category-message-error"></div>
+                    </label>
+    
+                    <label class="flex flex-col gap-2">
+                        <span>Fecha</span>
+                        <input type="date" id="date" class="p-2 bg-gray-50" required>
+                        <div class="text-red-500 text-sm" id="category-message-error"></div>
+                    </label>
+
+                    <div class="flex justify-end gap-2">
+                        <button type="button" class="p-2 rounded text-sm bg-gray-200 hover:bg-gray-300" data-toggle="modal">Cancelar</button>
                         <button type="submit" class="p-2 rounded text-sm text-white bg-blue-500 hover:bg-blue-600">
                             Crear Operación
                         </button>
@@ -387,6 +380,7 @@
             </article>
         </aside>
     </div>
+    
 
     <!-- CDN: uuidv4 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/uuid/8.1.0/uuidv4.min.js"></script>
