@@ -135,8 +135,11 @@ formEditCategory.addEventListener('submit', (event) => {
     categories.edit( id, { name: event.target['rename'].value })
 
     updatedCategories(listCategories)
-    // funcion que actualiza operaciones
+
     updatedOperations(listOperations, operations.getAll())
+
+    fillCategories()
+    
     push('#/categorias')
 })
 
@@ -332,7 +335,6 @@ const updatedReports = (element, array) => {
     `
 }
 
-
 updatedReports(reports, operations.getAll())
 
 
@@ -362,7 +364,6 @@ const editOperation = (operation, id) => {
 const deleteOperation = (id) => {
     operations.remove(id)
     updatedOperations(listOperations, operations.getAll())
-    updatedBalance()
 }
 
 // Form Create
