@@ -109,6 +109,10 @@ const editCategory = (name, id) => {
 // Delete
 const deleteCategory = (id) => {
     categories.remove(id)
+    
+    const operationsDelete = filterByCategory(operations.getAll(), id)
+    operationsDelete.map(el => operations.remove(el.id))
+
     updatedCategories(listCategories)
     updatedOperations(listOperations, operations.getAll())
 }
@@ -188,7 +192,10 @@ const updatedReports = (element, array) => {
 
     element.innerHTML = ''
 
-    if(!array ||  array.length === 0) {
+    const profits = array.some(el => el.type === 'profits' )
+    const spending = array.some(el => el.type === 'spending' )
+
+    if(!array ||  array.length === 0 || !profits || !spending ) {
         reports.classList.add('hidden')
         notReports.classList.remove('hidden')
         return 
